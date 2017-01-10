@@ -1,0 +1,294 @@
+import java.util.Scanner;
+
+public class ConnectFour{
+	
+	private final static int WIDTH = 7, HEIGHT = 6;
+	private static int row = 0, column = 0;
+	private static char token, computerToken;
+	private static int win = 0;
+	private static int turn1 = 0;
+	private static boolean input = false;
+	private static String player = null;
+	private static int lowestSpace;
+	
+	//board stores characters
+	static char[][]board = new char[WIDTH][HEIGHT];
+	
+	// the main method is the entry point for a program
+    // inside methods the statements get executed in the order they appear in the code
+	public static void main(String[] args){
+		gameRules();
+		setupBoard();
+		userInput();	
+		userInputToken();
+		for(int turn=1; turn<10; turn++){
+			while(input==false){
+				userInputRow();
+				userInputColumn();
+				//checkSpace(row,column);
+				checkLowestSpace(column);
+			}
+			gameLogic(row, column, token, computerToken, turn);
+			win = checkWin(row,column);
+			if (win>0){
+				turn=10;
+			}
+			displayBoard();
+			input=false;
+		}
+		winMsg(player,win);
+	}
+	
+	
+	
+	private static void gameRules(){
+		System.out.println("------------------------------");
+		System.out.println("Tic Tac Toe Game Rules:");
+		System.out.println("In order to win, you must connect 3 x's or o's vertically, horizontally, or diagonally.");
+		System.out.println();
+		System.out.println(" You, the user, are given the choice of 'X' or 'O' for your your symbol.");
+		System.out.println();
+		System.out.println("If you pick an invalid column, one that is full or non-existent you will be asked to pick a new column.");
+		System.out.println();
+		System.out.println("That's all, enjoy the game!");
+		System.out.println("------------------------------");
+	}
+	
+	
+	
+	private static void userInput(){
+		String response;
+		boolean flag = false;
+		
+		//prompting
+		System.out.println("\nAre you ready to begin? (yes or no)");
+		Scanner input = new Scanner(System.in);
+  
+		// while loop used to continue prompting user until they are ready to play
+		while(flag == false){
+			response = input.nextLine();
+			// set of if else statments to determine based off of user's input when they are ready to play
+			if (response.equals("yes")){
+				flag=true;
+			}
+			else if(response.equals("no")) {
+				//program waits for user to be ready to begin
+				System.out.println("Enter 'yes' when you are ready to begin.");
+				// sets flag to false in order to run through loop again
+				flag=false;
+			}
+			else {
+				// if response is not yes or no, even accounts for integers and floats
+				System.out.println("Try entering 'yes' or 'no'");
+				// sets flag to false in order to run through loop again
+				flag=false;
+			}
+		}
+	}
+	
+	
+	private static void userInputToken(){
+		String response;
+		boolean letter = false;
+			
+		//prompting
+		System.out.println("\nChoose a token: ('x'or'o')");
+		Scanner input = new Scanner(System.in);
+  
+		while(letter == false){
+			response = input.nextLine();
+			// set of if else statments to determine based off of user's input when they are ready to play
+			if (response.equals("x")){
+				System.out.println("\nPlayer1 selected token x");
+				System.out.println();
+				token = 'x';
+				System.out.println("Player2 will be token o");
+				computerToken = 'o';
+				letter=true;
+			}
+			else if(response.equals("o")) {
+				System.out.println("\nPlayer1 selected token o");
+				token = 'o';
+				System.out.println("Player2 will be token x");
+				computerToken = 'x';
+				letter=true;
+			}
+			else {
+				System.out.println("Try entering 'x' or 'o' ");
+				letter=false;
+			}
+		}
+	}
+	
+	
+	
+	private static int userInputRow(){
+		int iresponse;
+		boolean flag = false;
+		
+		Scanner input = new Scanner(System.in);
+			
+			System.out.println("");
+			System.out.println("____________________________________");
+
+		System.out.println("\nEnter a row (1-6)");
+		
+		while(flag == false){
+			while (!input.hasNextInt()) {
+				//tell user to enter in an integer value, and give them a chance to do so. Repeat as many times as nessacary until they do.	
+				System.out.println("Enter an integer, please!");
+				input.nextLine();
+			}
+			
+			iresponse = input.nextInt();
+			
+			if (iresponse <= 6 && iresponse > 0){
+				row = iresponse;
+				flag=true;
+			}
+			else  {
+				System.out.println("Not a vaild row, try (1-6)");
+				flag=false;
+			}
+		}
+		
+		return row;
+	}
+	
+	
+	private static int userInputColumn(){
+		int iresponse;
+		boolean flag = false;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("\nEnter a column (1-7)");
+				
+		while(flag == false){
+			while (!input.hasNextInt()) {
+				//tell user to enter in an integer value, and give them a chance to do so. Repeat as many times as nessacary until they do.	
+				System.out.println("Enter an integer, please!");
+				input.nextLine();
+			}
+			
+			iresponse = input.nextInt();
+			
+			if (iresponse <= 7 && iresponse > 0){
+				column = iresponse;
+				flag=true;
+			}
+			else  {
+				System.out.println("Not a vaild column, try (1-7)");
+				flag=false;
+			}
+		}
+		
+		return column;
+	}
+	
+	
+	
+	private static void checkSpace(int row){
+		if(board[row-1][column-1] == '.'){
+			input=true;
+		}
+		else{
+			//System.out.println("This space has already been selected!");
+			input=false;
+		}
+	}
+	
+	private static void checkLowestSpace(int column, int row) {
+		//place token in next availiable row, in the selected column
+		//1. get column selected
+		//2. put token in space with next avaliable open space
+		//for loop that checks from bottom up?
+		//if row maximum is already reached, error (pick another column)
+		//if all rows maximum, error (pick another column)
+		//use the checkspace method with a for loop on the column
+		for (int row=0; row<HEIGHT; row++) {
+			checkSpace(row,column);
+		}
+			if (input==true){
+				row=HEIGHT;
+			}
+		
+	}
+		
+	
+	
+	private static void setupBoard(){
+		for(int width=0; width < WIDTH; width++){
+			for(int height=0; height < HEIGHT; height++){
+				board[width][height]='.';
+			}
+		}	
+	}
+	
+	
+	
+	private static void gameLogic(int row, int column, char token, char computerToken, int turn)
+	{
+		if(turn % 2 == 1) //player turn
+		{
+			System.out.println("\nplayer 1's turn: " + "(" + token + ")\n");
+			System.out.println("");
+			System.out.println("____________________________________");
+			
+			board[row-1][column-1]=token;
+			System.out.println("\nplayer 1's turn: " + "(" + token + ")\n");
+			player="player1";
+		} else {
+			System.out.println("\nplayer 1's turn: " + "(" + token + ")\n");
+			System.out.println("____________________________________");
+			
+			board[row-1][column-1]=computerToken;
+			System.out.println("\nplayer 2's turn: " + "(" + computerToken + ")\n");
+			player="player2";
+		}
+	}
+	
+	
+	
+	private static int checkWin(int row, int column){
+		
+		return 0;
+		
+	}
+	
+	
+	
+	private static void displayBoard(){
+		for(int width=0; width < WIDTH; width++){
+			for(int height=0; height < HEIGHT; height++){
+				System.out.print(board[width][height]);
+			}
+			System.out.println("");
+		}	
+	}
+	
+	
+	
+	private static void winMsg(String player, int win){
+		switch (win) {
+            case 1:  
+				System.out.println(player+" won the game with 3-in-a-row!");
+                break;
+            case 2:  
+				System.out.println(player+" won the game with 3-in-a-column!");
+                break;
+            case 3:  
+				System.out.println(player+" won the game on a diagonal!");
+                break;
+            case 4:  
+				System.out.println(player+" won the game on a diagonal!");
+                break;
+            case 5:  
+				System.out.println("Cat's game...");
+                break;				
+            default: 
+				System.out.println("The program is broken!");
+                break;
+        }
+	}
+}
