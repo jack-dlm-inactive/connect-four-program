@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+class Main 
+{
+	
+	public static void main(String[] args) 
+	{
+		 char[][] board = new char[6][7];
+		
+		displayBoard(board);
+		//playConnectFour(board);
+	}
+	
+	public static void displayBoard(char[][] board)
+	{
+		for(int i=0; i<board.length; i++)
+		{
+			for(int j=0; j<board[i].length; j++)
+				System.out.print("|" + " " + board[i][j]);
+				System.out.println("|");
+		}
+		
+		for(int i=0; i<board.length - 1; i++) 
+		 	System.out.print("---");
+	}
+	 
+
+	public static void playConnectFour(char[][] board)
+	{
+		Scanner input = new Scanner(System.in);
+		
+		boolean gameOver = false;
+		boolean playersTurn = true;
+		int columnPosition = 0;
+		// when playersTurn = true: X player's turn
+		char token;
+		
+		while(!gameOver)
+		{
+			if(playersTurn = true) {
+				System.out.print("drop an X in column 0-6:");
+				token = 'X';
+				playersTurn = !playersTurn;
+			} 
+			else {
+				System.out.print("drop an O in column 0-6:");
+				token = 'O';
+			}
+			columnPosition = input.nextInt;
+			playersTurn = !playersTurn;
+			dropToken(board(board, columnPosition, token));
+			playersTurn = !playersTurn;
+		}
+		input.close();
+		
+	}
+	
+	public static boolean dropToken(char[][] board, int columnPosition, char token)
+	{
+		for(int i=board.length - 1; i>=0; i++)
+			if(board[i][columnPosition] == 0)
+			{
+				board[i][columnPosition] = token;
+			}
+		return true;
+	}
+	
+	
+}
