@@ -8,7 +8,7 @@ class Main
 		 char[][] board = new char[6][7];
 		
 		displayBoard(board);
-		//playConnectFour(board);
+		playConnectFour(board);
 	}
 	
 	public static void displayBoard(char[][] board)
@@ -22,6 +22,7 @@ class Main
 		
 		for(int i=0; i<board.length - 1; i++) 
 		 	System.out.print("---");
+		 	System.out.println();
 	}
 	 
 
@@ -37,7 +38,7 @@ class Main
 		
 		while(!gameOver)
 		{
-			if(playersTurn = true) {
+			if(playersTurn) {
 				System.out.print("drop an X in column 0-6:");
 				token = 'X';
 				playersTurn = !playersTurn;
@@ -46,22 +47,151 @@ class Main
 				System.out.print("drop an O in column 0-6:");
 				token = 'O';
 			}
-			columnPosition = input.nextInt;
+			columnPosition = input.nextInt();
+			
+			while(columnPosition<0 || columnPosition>6) 
+			{
+				System.out.print("Column position must be between 0 and 6.");
+				columnPosition = input.nextInt();	
+			}
 			playersTurn = !playersTurn;
-			dropToken(board(board, columnPosition, token));
+			
+			if(dropToken(board, columnPosition, token))
 			playersTurn = !playersTurn;
+			else 
+			{
+				displayBoard(board);
+				if(gameStatus(board, columnPosition, token))
+				{
+					gameOver = true;
+					System.out.print(token + "won! Game over.");
+				}
+			}
 		}
 		input.close();
+		
+	public static boolean gameStatus(char[][] board, int columnPosition, int token)
+	{
+		int rowPosition = 0;
+		
+		for(int i =0; i<board.length; i++)
+			if(board[i][columnPosition] != 0)
+			{
+				rowPosition = i;
+				break;
+			}
+			
+		if(checkColumn(char[][] board, int columnPosition, int token, int rowPosition))
+			return true;
+			
+		if(checkRow(char[][] board, int columnPosition, int token, int rowPosition))
+			return true;
+			
+		if(checkMajorDiagonal(char[][] board, int columnPosition, int token, int rowPosition))
+			return true;
+			
+		if(checkMinorDiagonal(char[][] board, int columnPosition, int token, int rowPosition))
+			return true;
+
+			
+		return false;
+	}
+	
+	public static boolean checkMinorDiagonal(char[][] board, int columnPosition, int token, int rowPosition)
+	{
+		int tokenCounter = 1;
+		
+		for(int i = rowPosition +1, j = columnPosition - 1; i<board.length && j>=0; i++, j--)
+			if(token == board[i][j])
+				tokenCounter++;
+			else
+				break;
+		
+		if(tokenCounter >= 4)
+			return true;
+			
+		return false;
+	}
+	
+	public static boolean checkMajorDiagonal(char[][] board, int columnPosition, int token, int rowPosition)
+	{
+		int tokenCounter = 1;
+		
+		for(int i = rowPosition - 1, j = columnPosition -1; i >= 0 && j >= 0, i--, j--)
+			if(token == board[i][j])
+				tokenCounter++;
+			else
+				break;
+				
+			if(tokenCounter >= 4)
+				return true;
+				
+			for(int i = rowPosition + 1, j = columnPosition 
+			+ 1; i < board.length && j < board[0].length; i++, j++)
+				if(token == board[i][j])
+					tokenCounter++;
+				else
+					break;
+			if(tokenCounter >= 4)
+				return true; 
+				
+			return false;
+	}
+		
+	public static boolean checkRow(char[][] board, int columnPosition, int token, int rowPosition)
+	{
+		int tokenCounter = 1;
+		for(int i = columnPosition - 1; i>=0; i--)
+			if(token == board[i][rowPosition])
+				tokenCounter++;
+			
+			else
+				break;
+				
+			if(tokenCounter >= 4)
+				return true;
+				
+			for(int i = columnPosition + 1; i < board[0].length; i++)
+				if(token == board[rowPosition][i])
+					tokenCounter++;
+				else
+					break;
+				
+				if(tokenCounter >= 4)
+					return true;
+					
+			return false;
+	}
+	
+	
+	public static boolean checkColumn(char[][] board, int columnPosition, int token, int rowPosition)
+	{
+		int tokenCounter = 1;
+		if((rowPosition + 4) <= 6)
+			for(int i = rowPosition + 1; i <= (rowPosition + 3); i++)
+				if(token == board[i][columnPosition])
+					tokenCounter++;
+				else
+					break;
+				if(tokenCounter == 4)
+					return true;
+					
+				return false;
+	}
+		
 		
 	}
 	
 	public static boolean dropToken(char[][] board, int columnPosition, char token)
 	{
-		for(int i=board.length - 1; i>=0; i++)
+		for(int i=board.length - 1; i>=0; i--)
 			if(board[i][columnPosition] == 0)
 			{
 				board[i][columnPosition] = token;
+				return false;
 			}
+			
+		System.out.println("Column full " + token + " player, try again!");
 		return true;
 	}
 	
