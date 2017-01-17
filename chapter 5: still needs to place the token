@@ -1,0 +1,184 @@
+import java.util.Scanner;
+class Main
+{
+  public static void main(String[] args) 
+  {
+    char playerOneToken = 'X';
+    char playerTwoToken = 'O';
+    int column = 0;
+    int row = 0;
+    boolean gameOver = false;
+    char[][] board = new char[6][7];
+    gameRules();
+    userInputStart();
+    setToken(playerOneToken, playerTwoToken);
+    for(int turn=1; turn<42; turn++)
+    {
+    	while(!gameOver)
+    	{
+    				userInputColumnX(column, gameOver);
+    				dropTokenX(board, column, row, playerOneToken);
+    				displayBoard(board);
+    		
+	 				userInputColumnO(column, gameOver);	
+	 				dropTokenO(board, column, row, playerTwoToken);
+    				displayBoard(board);
+    		
+    	}
+    }
+  }
+  public static void gameRules()
+  {
+  	System.out.println("Connect Four. How to play:");
+  	System.out.println("1) select which token you would like to play with: X or O.");
+  	System.out.println("2) select where you would like to place your tokens, have your opponent do the same.");
+  	System.out.println("3) connect four tokens either in a row, column, or diaognal to win.");
+  	System.out.println("That's all, enjoy the game!");
+  }
+  public static void userInputStart()
+  {
+  	String response;
+	boolean flag = false;
+		
+		System.out.println("\nAre you ready to begin? (yes or no)");
+		Scanner input = new Scanner(System.in);
+  
+		while(flag == false)
+		{
+			response = input.nextLine();
+			
+			if (response.equals("yes"))
+			{
+				flag=true;
+				System.out.println("");
+			}
+			else if(response.equals("no")) 
+			{
+				System.out.println("Enter 'yes' when you are ready to begin.");
+				flag=false;
+			}
+			else 
+			{
+				System.out.println("Try entering 'yes' or 'no'");
+				flag=false;
+			}
+		}
+  }
+  public static void setToken(char playerOneToken,char playerTwoToken)
+  {
+				System.out.println("Player1 will be token X");
+				playerOneToken = 'x';
+				System.out.println("Player2 will be token O.");
+				playerTwoToken = 'o';
+		
+  }
+  public static int userInputColumnX(int column, boolean gameOver)
+  {
+  	int iresponse;
+	boolean flag = false;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("\nDrop an X in a column (1-7)");
+				
+		while(flag == false && !gameOver){
+			while (!input.hasNextInt()) {
+				
+				System.out.println("Enter an integer, please!");
+				input.nextLine();
+			}
+			
+			iresponse = input.nextInt();
+			
+			if (iresponse <= 7 && iresponse > 0){
+				column = iresponse;
+				flag=true;
+			}
+			else  {
+				System.out.println("Not a vaild column, try (1-7)");
+				flag=false;
+			}
+		}
+		
+		return column;
+  }
+  public static int userInputColumnO(int column, boolean gameOver)
+  {
+  	int iresponse;
+	boolean flag = false;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("\nDrop an O in a column (1-7)");
+				
+		while(flag == false && !gameOver){
+			while (!input.hasNextInt()) {
+				
+				System.out.println("Enter an integer, please!");
+				input.nextLine();
+			}
+			
+			iresponse = input.nextInt();
+			
+			if (iresponse <= 7 && iresponse > 0){
+				column = iresponse;
+				flag=true;
+			}
+			else  {
+				System.out.println("Not a vaild column, try (1-7)");
+				flag=false;
+			}
+		}
+		
+		return column;
+  }
+  public static void dropTokenX(char[][] board, int column, int row, char playerOneToken)
+  {
+  	boolean open = false;
+  	
+  	while(!open)
+  	{
+  		if(board[column][row] != 'X' || board[column][row] != 'O')
+  		{
+  			open = true; 
+  		}
+  		else
+  		{
+  			open = false; 
+  			row--;
+  		}
+  	}
+	
+  }
+  public static void dropTokenO(char[][] board, int column, int row, char playerTwoToken)
+  {
+  boolean open = false;
+  	
+  	while(!open)
+  	{
+  		if(board[column][row] != 'X' || board[column][row] != 'O')
+  		{
+  			open = true; 
+  		}
+  		else
+  		{
+  			open = false; 
+  			 row--;
+  		}
+  	}
+	
+  }
+  public static void displayBoard(char[][] board)
+  {
+  	for(int i=0; i<board.length; i++)
+		{
+			for(int j=0; j<board[i].length; j++)
+				System.out.print("|" + " " + board[i][j]);
+				System.out.println("|");
+		}
+		
+		for(int i=0; i<board.length - 1; i++) 
+		 	System.out.print("---");
+		 	System.out.println();
+  }
+}
