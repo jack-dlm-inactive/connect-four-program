@@ -1,0 +1,38 @@
+ public static int dropTokenX(char[][] board, int column, int row, char playerOneToken)
+  {
+  	boolean open = false;
+  	
+  	while(!open)
+  	{
+  		if(board[column][row] != 'X' || board[column][row] != 'O')
+  		{
+  			open = true; 
+  		}
+  		else
+  		{
+  			open = false; 
+  			row++;
+  		}
+  		board[row][column]=playerOneToken;
+  	}
+	return row;
+  }
+  public static void dropTokenO(char[][] board, int column, int row, char playerTwoToken)
+  {
+  boolean open = false;
+  	
+  	while(!open)
+  	{
+  		if(board[column][row] != 'X' || board[column][row] != 'O')
+  		{
+  			open = true; 
+  		}
+  		else
+  		{
+  			open = false; 
+  			 row++;
+  		}
+  		
+  	}
+	
+  }
