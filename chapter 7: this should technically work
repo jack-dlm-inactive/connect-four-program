@@ -1,0 +1,211 @@
+import java.util.Scanner;
+public class Main
+{
+	public static int column = 0;
+    public static int row = 0;
+    final static int WIDTH = 6;
+    final static int HEIGHT = 7;
+    final static int LOWEST_ROW = WIDTH - 1;
+    static boolean gameOver = false;
+  	static char[][] board = new char[WIDTH][HEIGHT];
+  public static void main(String[] args) 
+  {
+    
+    gameRules();
+    for(int turn=1; turn<42; turn++)
+    {
+    	while(!gameOver)
+    	{
+    				userInputColumnX();
+    				createBoard();
+    				dropTokenX();
+    				createBoard();
+    				displayBoard();
+    		
+	 				userInputColumnO();	
+	 				createBoard();
+	 				dropTokenO();
+	 				createBoard();
+    				displayBoard();
+    		
+    	}
+    }
+  
+  }
+  public static void gameRules()
+  {
+  	System.out.println("Connect Four. How to play:");
+  	System.out.println("1) select which token you would like to play with: X or O.");
+  	System.out.println("2) select where you would like to place your tokens, have your opponent do the same.");
+  	System.out.println("3) connect four tokens either in a row, column, or diaognal to win.");
+  	System.out.println("That's all, enjoy the game!");
+  	System.out.println("");
+  	System.out.println("Player1 will be token X");
+  	System.out.println("");
+  	System.out.println("Player2 will be token O");
+  }
+  public static void userInputStart()
+  {
+  	String response;
+	boolean flag = false;
+		
+		System.out.println("\nAre you ready to begin? (yes or no)");
+		Scanner input = new Scanner(System.in);
+  
+		while(flag == false)
+		{
+			response = input.nextLine();
+			
+			if (response.equals("yes"))
+			{
+				flag=true;
+				System.out.println("");
+			}
+			else if(response.equals("no")) 
+			{
+				System.out.println("Enter 'yes' when you are ready to begin.");
+				flag=false;
+			}
+			else 
+			{
+				System.out.println("Try entering 'yes' or 'no'");
+				flag=false;
+			}
+		}
+  }
+  
+  public static int userInputColumnX()
+  {
+  	int iresponse;
+	boolean flag = false;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("\nDrop an X in a column (1-7)");
+				
+		while(flag == false && !gameOver){
+			while (!input.hasNextInt()) {
+				
+				System.out.println("Enter an integer, please!");
+				input.nextLine();
+			}
+			
+			iresponse = input.nextInt();
+			
+			if (iresponse <= 7 && iresponse > 0){
+				column = iresponse;
+				flag=true;
+			}
+			else  {
+				System.out.println("Not a vaild column, try (1-7)");
+				flag=false;
+			}
+		}
+		
+		return column;
+  }
+  public static int userInputColumnO()
+  {
+  	int iresponse;
+	boolean flag = false;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("\nDrop an O in a column (1-7)");
+				
+		while(flag == false && !gameOver){
+			while (!input.hasNextInt()) {
+				
+				System.out.println("Enter an integer, please!");
+				input.nextLine();
+			}
+			
+			iresponse = input.nextInt();
+			
+			if (iresponse <= 7 && iresponse > 0){
+				column = iresponse;
+				flag=true;
+			}
+			else  {
+				System.out.println("Not a vaild column, try (1-7)");
+				flag=false;
+			}
+		}
+		
+		return column;
+  }
+  public static void dropTokenX()
+  {
+  //creates a counter
+       int counter = 1;
+        
+
+        while(true){
+            if(column > WIDTH || column < WIDTH){
+                System.out.println("That's not a valid column");
+                break;
+            }
+
+            if (board[LOWEST_ROW][column] == '.') { //checks to see if space is blank, puts X there if it is
+                board[LOWEST_ROW][column] = 'X';
+                break; //breaks loop after placing
+            }else if(board[LOWEST_ROW][column] == 'X' || board[LOWEST_ROW][column] == 'O'){ //if space isn't blank, checks to see if one above is
+                if(board[LOWEST_ROW - counter][column] == '.'){ //puts X if blank
+                    board[LOWEST_ROW - counter][column] = 'X';
+                    break; //breaks loop after placing
+                }
+            }
+            counter += 1; //adds one to counter if the space wasn't blank, then loops again
+            if(counter == WIDTH){ //checks to see if at end of column
+                System.out.println("That column is full");
+                break;
+            }
+        }
+  }
+  public static void dropTokenO()
+  {
+ //creates a counter
+        int counter = 1;
+	
+        while(true){
+            if(column > WIDTH || column < WIDTH){
+                System.out.println("That's not a valid column");
+                break;
+            }
+
+            if (board[LOWEST_ROW][column] == '.') { //checks to see if space is blank, puts O there if it is
+                board[LOWEST_ROW][column] = 'O';
+                break; //breaks loop after placing
+            }else if(board[LOWEST_ROW][column] == 'X' || board[LOWEST_ROW][column] == 'O'){ //if space isn't blank, checks to see if one above is
+                if(board[LOWEST_ROW - counter][column] == '.'){ //puts O if blank
+                    board[LOWEST_ROW - counter][column] = 'O';
+                    break; //breaks loop after placing
+                }
+            }
+            counter += 1; //adds one to counter if the space wasn't blank, then loops again
+            if(counter == WIDTH){ //checks to see if at end of column
+                System.out.println("That column is full");
+                break;
+            }
+        }
+	
+  }
+  public static void createBoard()
+  {
+  	for (int w = 0; WIDTH > w; w += 1) {
+            for (int h = 0; HEIGHT > h; h += 1) {
+                board[w][h] = '.';
+            }
+        }
+  }
+  public static void displayBoard()
+  {
+  	for (int w = 0; WIDTH > w; w += 1) {
+            for (int h = 0; HEIGHT > h; h += 1) {
+                System.out.print(board[w][h]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+  }
+}
