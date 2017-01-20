@@ -1,0 +1,270 @@
+// name: 		Program_7
+// author:		Jack de la Motte
+// date: 		january 26th
+// description:	an interactive, two player connect four game
+
+import java.util.Scanner;
+
+class Main
+{
+  //METHOD MAIN
+  
+	public static void main(String[] args)
+	{
+		//Declare variables
+		final int HEIGHT = 6;
+		final int WIDTH = 7;
+		String[][] grid = new String[HEIGHT][WIDTH];
+		int turn = 1;
+		int column = 0;
+		int row = 0;
+		int playerTurn = 1;
+		boolean tieGame = false;
+		boolean columnSpace = false;
+		boolean winner = false;
+		
+		rules();
+		
+		 for (row = 0; row < 6; row++)
+	    {
+	        for (column = 0; column < 7; column++)
+	        {
+	            grid[row][column] = " ";
+	        }
+	    }
+		
+		while ((winner == false) && (tieGame == false))
+		{
+			
+			//Loop to receive coordinate input and check if spot is open
+			System.out.println("It's player " + playerTurn + "'s turn!");
+			if (turn < 43)
+			{
+	        	while (columnSpace == false)
+				{
+					column = columnPlacement(column);
+					row = determineRow(row, column, grid);
+					columnSpace = checkColumn(row);
+				}
+			}
+			
+			//Places mark where Player 1 wants it
+			if (playerTurn == 1)
+			{
+			    grid[row][column] = "x";
+			}
+			
+			//Places mark where Player 2 wants it
+			if (playerTurn == 2)
+			{
+			    grid[row][column] = "o";
+			}
+			
+			//Displays game with new coordinate input
+			displayGame(grid);
+			
+			//Checks if there is three in a row
+			//winner = winCheck(turn, grid, column, row, playerTurn);
+			
+			if (winner == true)
+			{
+			    System.out.println("Player " + playerTurn + " has won the game!");
+			}
+			
+			//Checks whether not board is full and whether or not there is a tie game
+			tieGame = boardFull(turn, winner);
+		 	if (tieGame == true)
+			{
+				System.out.println("The game ended in a tie!");
+	    	}
+			
+			if (playerTurn == 1)
+			{
+				playerTurn = 2;
+			}
+			else
+			{
+				playerTurn = 1;
+			}
+			
+			turn++;
+			columnSpace = false;
+		}
+	}
+	
+	
+	
+	
+	
+	//METHOD RULES
+	public static void rules()
+	{
+		String[][] grid;
+	
+		//Displays rules
+		System.out.println();
+		System.out.println("---------------------------------------------------------");
+		System.out.println("| Welcome to Connect Four!                              |");
+		System.out.println("| Player 1 is x and player 2 is o.                      |");
+		System.out.println("| take turns dropping tokens in any column on the board.|");
+		System.out.println("| The first person to 4 in a row wins!                  |");
+		System.out.println("| 4 in a row can be horizontal, vertical, or diagonal.  |");
+		System.out.println("| Good luck!                                            |");
+		System.out.println("---------------------------------------------------------");
+		System.out.println();
+		
+	}
+	
+	
+	
+	
+	
+//METHOD COLUMNPLACEMENT
+ public static int columnPlacement(int column)
+   {
+  	//Creates new scanner variable
+  	Scanner sc = new Scanner(System.in);
+  		
+  	//Asks user which column they want their piece in
+  	System.out.println();
+  	System.out.println("Which column do you want to put your piece in?");
+  	System.out.println("Please choose a number 0 - 6.");
+  	System.out.println();
+  	column = sc.nextInt();
+ 	
+    //Checks that user input is 0, 1, or 2
+  	while (column > 6 || column < 0)
+  	{
+  		System.out.println("That answer is not valid. Please enter a number 0 - 6.");
+  		column = sc.nextInt();
+  	}
+  			
+  	return column;
+  }
+  
+  
+  
+  
+  
+//METHOD DETERMINEROW
+  public static int determineRow(int row, int column, String[][] grid)
+  {
+   boolean open = false;
+      row = 5;
+  	
+  	while(open == false)
+  	{
+  		if(grid[row][column] != "x" || grid[row][column] != "o")
+  		{
+  			open = true;
+  			if(grid[row][column] == "x" || grid[row][column] == "o")
+  			{
+  	      row = row-1;
+  	      if(grid[row][column] == "x" || grid[row][column] == "o")
+  	      {
+  	        row = row-1;
+  	        if(grid[row][column] == "x" || grid[row][column] == "o")
+  	        {
+  	          row = row-1;
+  	          if(grid[row][column] == "x" || grid[row][column] == "o")
+  	          {
+  	            row = row-1;
+  	             if(grid[row][column] == "x" || grid[row][column] == "o")
+  	             {
+  	               row = row-1;
+  	               if(grid[row][column] == "x" || grid[row][column] == "o")
+  	               {
+  	                 return -1;
+  	               }
+  	             }
+  	          }
+  	        }
+  	      }
+  	      
+  			}
+  			
+  			return row;
+  			
+  		}
+  		else
+  		{
+  			open = false; 
+  			row = row-1;
+  		}
+  	
+    }
+    return row;
+  }
+  
+  
+  
+  
+  
+//METHOD CHECKCOLUMN
+  public static boolean checkColumn(int row)
+    {	
+    	if (row < 0)
+    	{
+    		System.out.println();
+    		System.out.println("This column is full.");
+    		System.out.println("Please choose a column with space to drop your token in!");
+    		System.out.println();
+    		return false;
+    	}
+    	
+    	else
+    	{
+    		return true;
+    	}
+	}
+	
+	
+	
+	
+	
+//METHOD DISPLAYGAME
+	public static void displayGame(String[][] grid)
+	{
+		int column;
+		int row;
+		
+		System.out.println();
+	    for (row = 0; row < 6; row++)
+	    {
+	        for (column = 0; column < 7; column++)
+	        {
+	            System.out.print(grid[row][column]);
+	            if (column < 6)
+	            {
+	              System.out.print("   |   ");
+	            }
+	        }
+	        System.out.println();
+	        if (row < 5)
+	        {
+	        System.out.println("----|-------|-------|-------|-------|-------|-----");
+	        }
+	    }
+	   System.out.println(); 
+	   System.out.println();
+	}
+	
+	
+	
+	
+	
+//METHOD BOARDFULL
+	public static boolean boardFull(int turn, boolean winner)
+	{
+		if (winner==false && turn==43)
+		{
+			return true;
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+}
+
