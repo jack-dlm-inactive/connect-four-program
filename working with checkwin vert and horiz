@@ -1,0 +1,349 @@
+// name: 		Program_7
+// author:		Jack de la Motte
+// date: 		january 26th
+// description:	an interactive, two player connect four game
+
+import java.util.Scanner;
+
+class Main
+{
+	// declaring variable for all methods
+  	final static int HEIGHT = 6;
+  	final static int WIDTH = 7;
+  	static String[][] grid = new String[HEIGHT][WIDTH];
+	static int turn = 1;
+	static int column = 0;
+	static int row = 0;
+	static int playerTurn = 1;
+	static boolean tieGame = false;
+	static boolean columnSpace = false;
+	static boolean winner = false;
+	
+	public static void main(String[] args)
+	{
+		
+		gameRules();
+		
+		
+		 for (row = 0; row < 6; row++)
+	    {
+	        for (column = 0; column < 7; column++)
+	        {
+	            grid[row][column] = " ";
+	        }
+	    }
+		
+		while ((winner == false) && (tieGame == false))
+		{
+			
+			//Loop to receive coordinate input and check if spot is open
+			System.out.println("It's player " + playerTurn + "'s turn!");
+			if (turn < 43)
+			{
+	        	while (columnSpace == false)
+				{
+					column = userInputColumn();
+					row = determineRow();
+					columnSpace = checkColumn();
+				}
+			}
+			
+			//Places mark where Player 1 wants it
+			if (playerTurn == 1)
+			{
+			    grid[row][column] = "x";
+			}
+			
+			//Places mark where Player 2 wants it
+			if (playerTurn == 2)
+			{
+			    grid[row][column] = "o";
+			}
+			
+			//Displays game with new coordinate input
+			displayGame();
+			
+			//Checks if there is three in a row
+			//winner = winCheck(turn, grid, column, row, playerTurn);
+			
+			if (winner == true)
+			{
+			    System.out.println("Player " + playerTurn + " has won the game!");
+			}
+			
+			//Checks whether not board is full and whether or not there is a tie game
+			tieGame = boardFull();
+		 	if (tieGame == true)
+			{
+				System.out.println("The game ended in a tie!");
+	    	}
+			
+			if (playerTurn == 1)
+			{
+				playerTurn = 2;
+			}
+			else
+			{
+				playerTurn = 1;
+			}
+			
+			turn++;
+			CheckXHorizontal();
+			CheckOHorizontal();
+			CheckXVertical();
+			CheckOVertical();
+			columnSpace = false;
+		}
+	}
+
+	public static void gameRules()
+	{
+		System.out.println();
+		System.out.println("---------------------------------------------------------");
+		System.out.println("| Welcome to Connect Four!                              |");
+		System.out.println("| Player 1 is x and player 2 is o.                      |");
+		System.out.println("| take turns dropping tokens in any column on the board.|");
+		System.out.println("| The first person to 4 in a row wins!                  |");
+		System.out.println("| 4 in a row can be horizontal, vertical, or diagonal.  |");
+		System.out.println("| Good luck!                                            |");
+		System.out.println("---------------------------------------------------------");
+		System.out.println();
+	}
+	
+	public static int userInputColumn()
+	{
+  		Scanner sc = new Scanner(System.in);
+  		
+  		System.out.println();
+  		System.out.println("Which column do you want to put your piece in?");
+  		System.out.println("Please choose a number 0 - 6.");
+  		System.out.println();
+  	
+  		column = sc.nextInt(); // sets column to users inputted number
+ 	
+
+  		while (column > 6 || column < 0) // accounts for out of bounds integers
+  		{
+  			System.out.println("That answer is not valid. Please enter a number 0 - 6.");
+  			column = sc.nextInt(); // retakes input
+  		}
+  			
+  		return column;
+	}
+  
+	public static int determineRow()
+	{
+	   boolean flag = false; 
+	   row = 5; // starts at bottom row (5)
+	  	
+	  	while(flag == false)
+	  	{
+	  		if(grid[row][column] != "x" || grid[row][column] != "o")  // does not equal an X or O
+	  		{
+	  			flag = true;
+	  			if(grid[row][column] == "x" || grid[row][column] == "o")
+	  			{
+	  	      		row = row-1;
+	  	      		if(grid[row][column] == "x" || grid[row][column] == "o")
+	  	      		{
+	  	        		row = row-1;
+	  	        		if(grid[row][column] == "x" || grid[row][column] == "o")
+	  	        		{
+	  	          			row = row-1;
+	  	          			if(grid[row][column] == "x" || grid[row][column] == "o")
+	  	        			{
+	  	            			row = row-1;
+	  	             			if(grid[row][column] == "x" || grid[row][column] == "o")
+	  	             			{
+	  	               				row = row-1;
+	  	               				if(grid[row][column] == "x" || grid[row][column] == "o")
+	  	               				{
+	  	                 				return -1;
+	  	               				}
+	  	             			}
+	  	          			}
+	  	    			}
+	  	      		}
+	  	      
+	  			}
+	  			return row;
+	  		}
+	  		else
+	  		{
+	  			flag = false; 
+	  			row = row-1;
+	  		}
+	  	
+	    }
+	    return row;
+	}
+  
+	public static boolean checkColumn()
+	{	
+    	if (row < 0)
+    	{
+    		System.out.println();
+    		System.out.println("This column is full.");
+    		System.out.println("Please choose a column with space to drop your token in!");
+    		System.out.println();
+    		return false;
+    	}
+    	else
+    	{
+    		return true;
+    	}
+	}
+	
+	public static void displayGame()
+	{
+		int column;
+		int row;
+			
+		System.out.println();
+		System.out.println("                     columns:");
+		System.out.println(" 0      1       2       3       4       5       6       ");
+		
+		    for (row = 0; row < 6; row++)
+		    {
+		        for (column = 0; column < 7; column++)
+		        {
+		            System.out.print(grid[row][column]);
+		            if (column < 6)
+		            {
+		              System.out.print("   |   ");
+		            }
+		        }
+		        System.out.println();
+		        
+		        if (row < 5)
+		        {
+		        System.out.println("----|-------|-------|-------|-------|-------|-----");
+		        }
+		    }
+		   System.out.println(); 
+		   System.out.println();
+	}
+	
+	public static boolean boardFull()
+	{
+		if (winner==false && turn==43)
+		{
+			return true;
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+	
+	public static void CheckXHorizontal()
+	{
+        //creates boolean to act as flag
+        boolean flag = true;
+
+        //creates counter
+        int counter = 0;
+        while(flag){
+
+            //goes through board horizontally
+            for(int w = 0; HEIGHT > w; w++){
+                for(int h = 0; WIDTH > h; h++){
+                    if(grid[w][h] == "x"){ //if it finds an X, add 1 to counter
+                        counter++;
+                    }else{
+                        counter = 0; // if next piece is not an X, set counter to 0
+                    }
+                    if(counter >= 4){
+                        System.out.println("Player 1 wins"); //if counter is greater or equal to 4, player wins
+                        System.exit(0);
+                        flag = false;
+                    }
+                }
+            }
+            break;
+        }
+   }
+   	public static void CheckOHorizontal()
+	{
+        //creates boolean to act as flag
+        boolean flag = true;
+
+        //creates counter
+        int counter = 0;
+        while(flag){
+
+            //goes through board horizontally
+            for(int w = 0; HEIGHT > w; w++){
+                for(int h = 0; WIDTH > h; h++){
+                    if(grid[w][h] == "o"){ //if it finds an X, add 1 to counter
+                        counter++;
+                    }else{
+                        counter = 0; // if next piece is not an X, set counter to 0
+                    }
+                    if(counter >= 4){
+                        System.out.println("Player 2 wins"); //if counter is greater or equal to 4, player wins
+                        System.exit(0);
+                        flag = false;
+                    }
+                }
+            }
+            break;
+        }
+   }
+   public static void CheckXVertical()
+	{
+        //creates boolean to act as flag
+        boolean flag = true;
+
+        //creates counter
+        int counter = 0;
+        while(flag){
+
+            //goes through board horizontally
+            for(int h = 0; WIDTH > h; h++){
+                for(int w = 0; HEIGHT > w; w++){
+                    if(grid[w][h] == "x"){ //if it finds an X, add 1 to counter
+                        counter++;
+                    }else{
+                        counter = 0; // if next piece is not an X, set counter to 0
+                    }
+                    if(counter >= 4){
+                        System.out.println("Player 1 wins"); //if counter is greater or equal to 4, player wins
+                        System.exit(0);
+                        flag = false;
+                    }
+                }
+            }
+            break;
+        }
+   }
+  public static void CheckOVertical()
+	{
+        //creates boolean to act as flag
+        boolean flag = true;
+
+        //creates counter
+        int counter = 0;
+        while(flag){
+
+            //goes through board horizontally
+            for(int h = 0; WIDTH > h; h++){
+                for(int w = 0; HEIGHT > w; w++){
+                    if(grid[w][h] == "o"){ //if it finds an X, add 1 to counter
+                        counter++;
+                    }else{
+                        counter = 0; // if next piece is not an X, set counter to 0
+                    }
+                    if(counter >= 4){
+                        System.out.println("Player 2 wins"); //if counter is greater or equal to 4, player wins
+                        System.exit(0);
+                        flag = false;
+                    }
+                }
+            }
+            break;
+        }
+   }
+  
+}
