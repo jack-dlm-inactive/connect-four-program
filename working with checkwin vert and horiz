@@ -16,7 +16,7 @@ class Main
 	static int row = 0;
 	static int playerTurn = 1;
 	static boolean tieGame = false;
-	static boolean columnSpace = false;
+	static boolean columnLocation = false;
 	static boolean winner = false;
 	
 	public static void main(String[] args)
@@ -40,11 +40,11 @@ class Main
 			System.out.println("It's player " + playerTurn + "'s turn!");
 			if (turn < 43)
 			{
-	        	while (columnSpace == false)
+	        	while (columnLocation == false)
 				{
 					column = userInputColumn();
 					row = determineRow();
-					columnSpace = checkColumn();
+					columnLocation = checkColumn();
 				}
 			}
 			
@@ -92,7 +92,7 @@ class Main
 			CheckOHorizontal();
 			CheckXVertical();
 			CheckOVertical();
-			columnSpace = false;
+			columnLocation = false;
 		}
 	}
 
@@ -347,3 +347,4 @@ class Main
    }
   
 }
+
