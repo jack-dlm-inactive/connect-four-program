@@ -1,0 +1,70 @@
+/*
+Jack de la Motte 
+Connect Four Pseudo code
+*/
+ 
+	main()
+	{
+		gameRules()
+		determineRow()
+		checkColumn()
+		displayGame()
+		
+		while(!winner && !tieGame)
+		{
+			System.out.print(players turn)
+			
+			while(!columnLocation)
+			{
+				determinRow()	
+				checkColumm()
+			}
+			if(playerTurn == 1)
+			{
+				print grid = "x"
+			}
+			if(playerTurn == 2)
+			{
+				print grid = "o"
+			}
+			displayGame();
+			turn++
+			checkBoard()
+			switch token
+			checkBoard()
+			switch token
+		}
+	}
+	gameRules(){
+		//
+	}
+	userInputColumn(){
+		//
+	}
+	determineRow(){
+		//	
+	}
+	checkColumn(){
+		//
+	}
+	displayGame(){
+		//	
+	}
+	boardFull(){
+		
+	}
+	checkHorizontal(){
+		
+	}
+	checkVertical(){
+		
+	}
+	checkMajorDiagonal(){
+		
+	}
+	checkMinorDiagonal(){
+		
+	}
+	checkBoar(){
+		
+	}
