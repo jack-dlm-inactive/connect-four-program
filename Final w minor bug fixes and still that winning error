@@ -474,16 +474,16 @@ class Main
    		{	
    			if(token == "x")
    			{
-   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
-   				System.out.println("! Player 1 won the game!");
-   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+   				System.out.println("!!! Player 1 won the game!!!");
+   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
    				System.exit(0);
    			}
    			else if(token == "o")
    			{
-   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
-   				System.out.println("! Player 2 won the game!");
-   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+   				System.out.println("!!! Player 2 won the game!!!");
+   				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
    				System.exit(0);
    			}
    			else
