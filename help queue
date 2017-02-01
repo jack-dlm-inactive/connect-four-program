@@ -1,0 +1,21 @@
+import java.util.Scanner;
+class Main {
+  public static void main(String[] args) {
+  	String response;
+  	Scanner sc = new Scanner(System.in);
+    System.out.println("welcome to the help queue.");
+    System.out.print("\nplease enter your name:");
+    response = sc.nextLine();
+    while(response != "Mr. B"){
+	    if(response.equals("Colee")){
+	    	System.out.print("\nillegible. try again.");
+	    	sc.nextLine();
+	    	continue;
+	    } else if(response.equals("Kellen")){
+	    	System.out.print("\nwelcome, grandmaster.");
+	    } else {
+	    	System.out.print("\nThe help queue does not recognize your name.");
+	    }
+    }
+  }
+}
