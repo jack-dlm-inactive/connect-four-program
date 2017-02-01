@@ -1,0 +1,35 @@
+import java.util.Scanner;
+class Main {
+	//static String response;
+  public static void main(String[] args) {
+	  	String response;
+	  	Scanner sc = new Scanner(System.in);
+	    System.out.println("welcome to the help queue.");
+	    System.out.print("please enter your name:");
+	    response = sc.nextLine();
+	    while(response != "Mr. B"){
+		    if(response.equals("Colee") || response.equals("colee")){
+		    	System.out.println("Try writing some of your own code, moron.");
+		    	printQueue(response);
+		    	break;
+		    } else if(response.equals("Kellen") || response.equals("kellen")){
+		    	System.out.println("welcome, grandmaster. your name is on the queue.");
+		    	printQueue(response);
+		    	break;
+		    } else if(response.equals("Mason") || response.equals("mason")) {
+		    	System.out.print("\nhey mason, your name is on the queue.");
+		    	printQueue(response);
+		    	break;
+		    } else {
+		    	System.out.println("The help queue does not recognize your name.");
+		    	sc.nextLine();
+		    }
+	    }
+	}
+  	public static void printQueue(String response){
+  		System.out.println();
+  		System.out.println("Help Queue:");
+  		System.out.println("-----------");
+  		System.out.println("1." + response);
+  	}
+}
