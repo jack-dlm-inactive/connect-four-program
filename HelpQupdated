@@ -1,0 +1,253 @@
+import java.util.Scanner;
+class Main 
+{
+	static Scanner sc = new Scanner(System.in);
+	static String name = "";
+	static String nameOne = "";
+	static String nameTwo = "";
+	static String nameThree = "";
+	static String nameFour = "";
+	static String nameFive = "";
+	static String nameSix = "";
+	static String nameSeven = "";
+	static String nameEight = "";
+	static String nameNine = "";
+	
+	public static void main(String[] args) 
+	{
+		getName();
+		printQueue();
+		getNameOne();
+		printQueue();
+		getNameTwo();
+		printQueue();
+		getNameThree();
+		printQueue();
+		getNameFour();
+		printQueue();
+		getNameFive();
+		printQueue();
+	}
+	public static String getName()
+	{
+  		System.out.println("> state your name:");
+  		name = sc.nextLine();
+  		while(true)
+  		{
+	  		if(name.equals("Colee") || name.equals("colee"))
+	  		{
+	  			System.out.println("\nGo back to your desk and try writing some of your own code.");
+	  			break;
+	  		}
+	  		else if(name.equals("Kellen") || name.equals("kellen"))
+	  		{
+	  			System.out.println("\nWelcome Sensei.");
+	  			break;
+	  		}
+	  		else if(name.equals("Mason") || name.equals("mason"))
+	  		{
+	  			System.out.println("\nMasonnnnnnnnnnnnnn");
+	  			break;
+	  		}
+	  		else
+	  		{
+	  			System.out.println("name not found in our databases. You are on the help queue.");
+	  			break;
+	  		}
+  		}
+  		return name;
+	}
+	public static String getNameOne()
+	{
+  		System.out.println("\nadd a second name to the help queue:");
+  		nameOne = sc.nextLine();
+  		while(true)
+  		{
+  			if(nameOne.equals(name))
+  			{
+  				System.out.println("your name is already on the queue!");
+  				System.exit(0);
+  			}
+  			else
+  			{
+		  		if(nameOne.equals("Colee") || nameOne.equals("colee"))
+		  		{
+		  			System.out.println("\nGo back to your desk and try writing some of your own code.");
+		  			break;
+		  		}
+		  		else if(nameOne.equals("Kellen") || nameOne.equals("kellen"))
+		  		{
+		  			System.out.println("\nWelcome Sensei.");
+		  			break;
+		  		}
+		  		else if(nameOne.equals("Mason") || nameOne.equals("mason"))
+		  		{
+		  			System.out.println("\nMasonnnnnnnnnnnnnn");
+		  			break;
+		  		}
+		  		else
+		  		{
+		  			System.out.println("name not found in our databases. You are on the help queue.");
+		  			break;
+		  		}
+  			}
+  		}
+  		return nameOne;
+	}
+	public static String getNameTwo()
+	{
+  		System.out.println("\nadd a third name to the help queue:");
+  		nameTwo = sc.nextLine();
+  		while(true)
+  		{
+  			if(nameOne.equals(name))
+  			{
+  				System.out.println("your name is already on the queue!");
+  				System.exit(0);
+  			}
+  			else
+  			{
+		  		if(nameTwo.equals("Colee") || nameTwo.equals("colee"))
+		  		{
+		  			System.out.println("\nGo back to your desk and try writing some of your own code.");
+		  			break;
+		  		}
+		  		else if(nameTwo.equals("Kellen") || nameTwo.equals("kellen"))
+		  		{
+		  			System.out.println("\nWelcome Sensei.");
+		  			break;
+		  		}
+		  		else if(nameTwo.equals("Mason") || nameTwo.equals("mason"))
+		  		{
+		  			System.out.println("\nMasonnnnnnnnnnnnnn");
+		  			break;
+		  		}
+		  		else
+		  		{
+		  			System.out.println("name not found in our databases. You are on the help queue.");
+		  			break;
+		  		}
+  			}
+  		}
+  		return nameTwo;
+	}
+	public static String getNameThree()
+	{
+  		System.out.println("\nadd a fourth name to the help queue:");
+  		nameThree = sc.nextLine();
+  		while(true)
+  		{
+	  		if(nameThree.equals("Colee") || nameThree.equals("colee"))
+	  		{
+	  			System.out.println("\nGo back to your desk and try writing some of your own code.");
+	  			break;
+	  		}
+	  		else if(nameThree.equals("Kellen") || nameThree.equals("kellen"))
+	  		{
+	  			System.out.println("\nWelcome Sensei.");
+	  			break;
+	  		}
+	  		else if(nameThree.equals("Mason") || nameThree.equals("mason"))
+	  		{
+	  			System.out.println("\nMasonnnnnnnnnnnnnn");
+	  			break;
+	  		}
+	  		else
+	  		{
+	  			System.out.println("name not found in our databases. You are on the help queue.");
+	  			break;
+	  		}
+  		}
+  		return nameThree;
+	}
+	public static String getNameFour()
+	{
+  		System.out.println("\nadd a fifth name to the help queue:");
+  		nameFour = sc.nextLine();
+  		while(true)
+  		{
+  			if(nameFour.equals(name))
+  			{
+  				System.out.println("your name is already on the queue!");
+  				System.exit(0);
+  			}
+  			else
+  			{
+		  		if(nameFour.equals("Colee") || nameFour.equals("colee"))
+		  		{
+		  			System.out.println("\nGo back to your desk and try writing some of your own code.");
+		  			break;
+		  		}
+		  		else if(nameFour.equals("Kellen") || nameFour.equals("kellen"))
+		  		{
+		  			System.out.println("\nWelcome Sensei.");
+		  			break;
+		  		}
+		  		else if(nameFour.equals("Mason") || nameFour.equals("mason"))
+		  		{
+		  			System.out.println("\nMasonnnnnnnnnnnnnn");
+		  			break;
+		  		}
+		  		else
+		  		{
+		  			System.out.println("name not found in our databases. You are on the help queue.");
+		  			break;
+		  		}
+  			}
+  		}
+  		return nameFour;
+	}
+	public static String getNameFive()
+	{
+  		System.out.println("\nadd a sixth name to the help queue:");
+  		nameFive = sc.nextLine();
+  		while(true)
+  		{
+  			if(nameFive.equals(name))
+  			{
+  				System.out.println("your name is already on the queue!");
+  				System.exit(0);
+  			}
+  			else
+  			{
+		  		if(nameFive.equals("Colee") || nameFive.equals("colee"))
+		  		{
+		  			System.out.println("\nGo back to your desk and try writing some of your own code.");
+		  			break;
+		  		}
+		  		else if(nameFive.equals("Kellen") || nameFive.equals("kellen"))
+		  		{
+		  			System.out.println("\nWelcome Sensei.");
+		  			break;
+		  		}
+		  		else if(nameFive.equals("Mason") || nameFive.equals("mason"))
+		  		{
+		  			System.out.println("\nMasonnnnnnnnnnnnnn");
+		  			break;
+		  		}
+		  		else
+		  		{
+		  			System.out.println("name not found in our databases. You are on the help queue.");
+		  			break;
+		  		}
+  			}
+  		}
+  		return nameFive;
+	}
+	public static void printQueue()
+	{
+		System.out.println("________________________________________");
+		System.out.println("             Help Queue:              ");
+		System.out.println(" 1. " + name);
+		System.out.println(" 2. " + nameOne);
+		System.out.println(" 3. " + nameTwo);
+		System.out.println(" 4. " + nameThree);
+		System.out.println(" 5. " + nameFour);
+		System.out.println(" 6. " + nameFive);
+		System.out.println(" 7. " + nameSix);
+		System.out.println(" 8. " + nameSeven);
+		System.out.println(" 9. " + nameEight);
+		System.out.println(" 10." + nameNine);
+		System.out.println("_________________________________________");
+	}
+}
