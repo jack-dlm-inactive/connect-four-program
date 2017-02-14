@@ -1,0 +1,292 @@
+//-----------------------------------------
+// Program: Variable Scope Lab 
+// Author:  Jack de la Motte
+// Co-author: Jauhm
+// Date:    2/7/2017
+// Description:   uses o.o.p. to educate about cows and horses. 
+//-----------------------------------------
+
+public class VariableScopeLab
+{
+	String className = this.getClass().getName();   // non-static 'this' cannot be used by static method
+
+	public static void main(String[] args)
+	{
+		System.out.println("---------------------------");
+		System.out.println("Class:  VariableScope");
+		System.out.println("Method: main");
+		System.out.println("---------------------------");
+
+		Cow hereford = new Cow();
+		System.out.println();
+		System.out.println("-------------------------");
+		System.out.println("|        Hereford       |");
+		System.out.println("-------------------------");
+		setHereford(hereford);
+		cowInfoHereford(hereford);
+		System.out.println();
+		
+		Cow blackAngus = new Cow();
+		System.out.println("-------------------------");
+		System.out.println("|       Black Angus     |");
+		System.out.println("-------------------------");
+		setBlackAngus(blackAngus);
+		cowInfoBlackAngus(blackAngus);
+		System.out.println();
+		
+		Cow dairyCow = new Cow();
+		System.out.println("-------------------------");
+		System.out.println("|       Dairy Cow       |");
+		System.out.println("-------------------------");
+		setDairyCow(dairyCow);
+		cowInfoDairyCow(dairyCow);
+		System.out.println();
+		
+		Horse mustang = new Horse();
+		System.out.println("----------------------------");
+		System.out.println("|         Mustang          |");
+		System.out.println("----------------------------");
+		setMustang(mustang);
+		horseInfoMustang(mustang);
+		System.out.println();	
+		
+		Horse apaloosa = new Horse();
+		System.out.println("----------------------------");
+		System.out.println("|         Apaloosa         |");
+		System.out.println("----------------------------");
+		setApaloosa(apaloosa);
+		horseInfoApaloosa(apaloosa);
+		System.out.println();
+		
+		Horse precheron = new Horse();
+		System.out.println("----------------------------");
+		System.out.println("|         Precheron        |");
+		System.out.println("----------------------------");
+		setPrecheron(precheron);
+		horseInfoPrecheron(precheron);
+		System.out.println();
+
+
+	}
+	public static void setHereford(Cow hereford){
+		hereford.weight = 905;
+		hereford.color = "brown";
+		hereford.chewethTheCud = true;
+		hereford.favoriteFood = "oats";
+		hereford.bumpCount();
+		hereford.getCount();
+	}
+	public static void setBlackAngus(Cow blackAngus){
+		blackAngus.weight = 1000;
+		blackAngus.color = "black";
+		blackAngus.chewethTheCud = true;
+		blackAngus.favoriteFood = "grass";
+		blackAngus.bumpCount();
+		blackAngus.getCount();
+	}
+	public static void setDairyCow(Cow dairyCow){
+		dairyCow.weight = 1800;
+		dairyCow.color = "spotted";
+		dairyCow.chewethTheCud = true;
+		dairyCow.favoriteFood = "grass";
+		dairyCow.bumpCount();
+		dairyCow.getCount();
+	}
+	public static void setMustang(Horse mustang){
+		mustang.weight = 750;
+		mustang.color = "black";
+		mustang.favoriteFood = "grass";
+		mustang.bumpCount();
+		mustang.getCount();
+	}
+	public static void setApaloosa(Horse apaloosa){
+		apaloosa.weight = 750;
+		apaloosa.color = "spotted";
+		apaloosa.favoriteFood = "grass";
+		apaloosa.bumpCount();
+		apaloosa.getCount();
+	}
+	public static void setPrecheron(Horse precheron){
+		precheron.weight = 2600;
+		precheron.color = "gray";
+		precheron.favoriteFood = "grass";
+		precheron.bumpCount();
+		precheron.getCount();
+	}
+	static void cowInfoHereford(Cow obj)
+	{
+	
+		//cowInfo method
+		System.out.println("| Family: " + obj.family + "       |");    
+		System.out.println("| Color: " + obj.color + "          |");
+		System.out.println("| Weight: " + obj.weight + " pounds    |");
+		System.out.println("| Cheweth the cud: " + obj.chewethTheCud + " |");
+		System.out.println("| Favorite food: " + obj.favoriteFood + "   |");
+		System.out.println("| cloven hoof: " + obj.havethTheClovenHoof + "     |");
+		System.out.println("-------------------------");
+		System.out.println();
+		obj.printCount();
+		System.out.println();
+
+	}
+	
+	static void cowInfoBlackAngus(Cow obj)
+	{
+		// This prints all Cow class and instance variables
+		System.out.println("| Family: " + obj.family + "       |");    
+		System.out.println("| Color: " + obj.color + "          |");
+		System.out.println("| Weight: " + obj.weight + " pounds   |");
+		System.out.println("| Cheweth the cud: " + obj.chewethTheCud + " |");
+		System.out.println("| Favorite food: " + obj.favoriteFood + "  |");
+		System.out.println("| cloven hoof: " + obj.havethTheClovenHoof + "     |");
+		System.out.println("-------------------------");
+		System.out.println();
+		obj.printCount();
+		System.out.println();
+	}
+	
+		static void cowInfoDairyCow(Cow obj)
+	{
+		// This prints all Cow class and instance variables
+		System.out.println("| Family: " + obj.family + "       |");    
+		System.out.println("| Color: " + obj.color + "        |");
+		System.out.println("| Weight: " + obj.weight + " pounds   |");
+		System.out.println("| Cheweth the cud: " + obj.chewethTheCud + " |");
+		System.out.println("| Favorite food: " + obj.favoriteFood + "  |");
+		System.out.println("| cloven hoof: " + obj.havethTheClovenHoof + "     |");
+		System.out.println("-------------------------");
+		System.out.println();
+		obj.printCount();
+		System.out.println();
+	}
+	
+	static void horseInfoMustang(Horse obj)
+	{
+		System.out.println("| Family: " + obj.family + " |");    
+		System.out.println("| Color: " + obj.color + "             |");
+		System.out.println("| Weight: " + obj.weight + " pounds       |");
+		System.out.println("| Cheweth the cud: " + obj.chewethTheCud + "   |");
+		System.out.println("| Favorite food: " + obj.favoriteFood + "     |");
+		System.out.println("| cloven hoof: " + obj.havethTheClovenHoof + "       |");
+		System.out.println("----------------------------");
+		System.out.println();
+		obj.printCount();
+		System.out.println();
+	}
+	
+	static void horseInfoApaloosa (Horse obj)
+	{
+		System.out.println("| Family: " + obj.family + " |");    
+		System.out.println("| Color: " + obj.color + "           |");
+		System.out.println("| Weight: " + obj.weight + " pounds       |");
+		System.out.println("| Cheweth the cud: " + obj.chewethTheCud + "   |");
+		System.out.println("| Favorite food: " + obj.favoriteFood + "     |");
+		System.out.println("| cloven hoof: " + obj.havethTheClovenHoof + "       |");
+		System.out.println("----------------------------");
+		System.out.println();
+		obj.printCount();
+		System.out.println();
+	}
+	
+	static void horseInfoPrecheron(Horse obj)
+	{
+		System.out.println("| Family: " + obj.family + " |");    
+		System.out.println("| Color: " + obj.color + "              |");
+		System.out.println("| Weight: " + obj.weight + " pounds      |");
+		System.out.println("| Cheweth the cud: " + obj.chewethTheCud + "   |");
+		System.out.println("| Favorite food: " + obj.favoriteFood + "     |");
+		System.out.println("| cloven hoof: " + obj.havethTheClovenHoof + "       |");
+		System.out.println("----------------------------");
+		System.out.println();
+		obj.printCount();
+		System.out.println();
+	}
+}
+
+//------------------------------------------------------
+
+class Cow
+{
+	//  Class (Static) variables -- shared by all objects instantiated from this class
+	static String family = "bovine";   
+	static boolean chewethTheCud = true;
+	static String favoriteFood = "oats";
+	static boolean havethTheClovenHoof = true;
+	private static int count = 0;       // Since private, it must be wrapped in a method
+	int weight = 0;                    
+    String color = "dun";
+	String className = this.getClass().getName();
+	
+	public void main(String[] args)
+	{
+		weight = 0;
+		String className = this.getClass().getName();
+		System.out.println("---------------------------");
+		System.out.println("Class:  Cow  " + className);
+		System.out.println("Method: main");
+	}
+		
+	public int getCount()
+	{
+		return count;
+	}
+	
+	public void bumpCount()
+	{
+		count++;
+	}
+	
+	public void printCount()
+	{
+		System.out.println("------------------");
+		System.out.println( "|Cow count = " + count + "   |");
+		System.out.println("------------------");
+	}
+	
+	public void printFamily()
+	{
+		System.out.println("  " + className + ".family = " + count);
+		System.out.println("Cow.printFamily() = " + family);
+	}
+}
+
+//--------------------------------------------------------
+
+class Horse
+{
+	//  Class (Static) variables -- shared by all objects instantiated from this class
+	static String family = "hoofed ungulate";   
+	static int count = 0;
+	static boolean chewethTheCud = false;
+	static String favoriteFood = "grass";
+	static boolean havethTheClovenHoof = false;
+	
+	//  Instance variables -- every object gets its own
+	int weight = 0;                    
+    String color = "weight";
+	
+	public void main(String[] args)
+	{
+		System.out.println("---------------------------");
+		System.out.println("Class:  Horse");
+		System.out.println("Method: main");
+
+	}
+	public int getCount()
+	{
+		return count;
+	}
+	
+	public void bumpCount()
+	{
+		count++;
+	}
+	
+	public void printCount()
+	{
+		//String className = this.getClass().getName();
+		System.out.println("------------------");
+		System.out.println("|Horse count = " + count + " |");
+		System.out.println("------------------");
+	}
+}
